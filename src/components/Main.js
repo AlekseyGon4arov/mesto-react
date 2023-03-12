@@ -4,11 +4,11 @@ import Card from './Card';
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
-  const [userName, setUserName] = React.useState();
+  const [userName, setUserName] = React.useState('');
 
-  const [userDescription, setUserDescription] = React.useState();
+  const [userDescription, setUserDescription] = React.useState('');
   
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userAvatar, setUserAvatar] = React.useState('');
 
   const [cards, setCards] = React.useState([]);
 
@@ -18,11 +18,17 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
+    })
+    .catch((err) => {
+      console.log(err);
     });
     api.getInitialCards() 
     .then((res) => {
       setCards(res);
     })
+    .catch((err) => {
+      console.log(err);
+    });
   },[]);
 
   return (
